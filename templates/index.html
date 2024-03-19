@@ -1,20 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Sentiment Analysis</title>
-</head>
-<body>
-    <h2>Sentiment Analysis with Hugging Face Transformers</h2>
-    <form method="post">
-        <textarea name="text" rows="4" cols="50" placeholder="Type your text here..."></textarea>
-        <br>
-        <input type="submit" value="Analyze Sentiment">
-    </form>
-    {% if sentiment %}
-        <h3>Analysis:</h3>
-        <p>Sentiment: <strong>{{ sentiment }}</strong></p>
-        <p>Text: "{{ text }}"</p>
-    {% endif %}
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Sentiment Analysis and Paraphrasing</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h2>Sentiment Analysis and Paraphrasing Tool</h2>
+      <form method="post">
+        <textarea name="text" placeholder="Enter text here..."></textarea>
+        <input type="submit" value="Analyze and Paraphrase" />
+      </form>
+
+      {% if original_text %}
+      <div class="analysis-results">
+        <div class="results-header">Original Text:</div>
+        <p>{{ original_text }}</p>
+
+        <div class="results-header">Sentiment Analysis:</div>
+        <p>
+          Negative Score:
+          <strong>{{ "%.2f" | format(negative_score * 100) }}%</strong>
+        </p>
+        <p>
+          Positive Score:
+          <strong>{{ "%.2f" | format(positive_score * 100) }}%</strong>
+        </p>
+      </div>
+
+      <div class="paraphrases">
+        <div class="results-header">Paraphrases:</div>
+        <ul>
+          {% for paraphrase in paraphrases %}
+          <li>{{ paraphrase }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+    </div>
+    <footer>Team #6 - Members: Trevor, Olga, Emily, Amarjot</footer>
+  </body>
 </html>
