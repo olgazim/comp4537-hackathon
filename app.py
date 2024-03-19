@@ -19,10 +19,7 @@ def index():
         outputs = model(**inputs)
         probs = F.softmax(outputs.logits, dim=-1)
         # sentiment = 'Positive' if probs[0][1] > probs[0][0] else 'Negative'
-        if probs[0][1] > probs[0][0]:
-            sentiment = probs[0][1].item()
-        else:
-            sentiment = -probs[0][0].item()
+        sentiment = probs[0][1].item()
         return render_template("index.html", sentiment=sentiment, text=text)
     return render_template("index.html", sentiment="", text="")
 
